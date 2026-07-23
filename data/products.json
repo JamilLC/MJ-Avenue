@@ -17,16 +17,18 @@
     "tallas": [ 
       
     {"talla": "39.5",
-    "stock": 1},
-      
-    {"talla": "40",
-    "stock": 3},
-      
-    {"talla": "43",
-    "stock": 1},
-    ]
-    
-  },
+    "stock": 1
+    },
+    {
+    "talla": "40",
+    "stock": 3
+    },
+    {
+    "talla": "43",
+    "stock": 1
+    }
+  ] 
+},
   {
     "id": "adidas-ownthegame-3-0-red-rojo-02",
     "carpeta": "TENNIS_OWNTHEGAME_3.0_REDROJO_ADIDAS",
