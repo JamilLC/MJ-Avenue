@@ -10,10 +10,14 @@ let productos = [];
 let marcaActiva = 'todas';
 let categoriaActiva = 'todas';
 let textoBusqueda = '';
+let ordenActivo = 'destacados';
 
 const grid = document.getElementById('grid-productos');
 const inputBuscador = document.getElementById('input-buscador');
 const filtrosMarca = document.getElementById('filtros-marca');
+const selectorOrden = document.getElementById('selector-orden');
+const botonLimpiar = document.getElementById('boton-limpiar');
+const contadorResultados = document.getElementById('contador-resultados');
 
 /* --------------------------------------------------------------------
    Carga inicial de datos
@@ -47,13 +51,26 @@ function rutaImagen(producto, archivo) {
    Filtra el arreglo de productos según marca, categoría y texto
    -------------------------------------------------------------------- */
 function obtenerProductosFiltrados() {
-  return productos.filter((p) => {
+  const filtrados = productos.filter((p) => {
     const coincideMarca = marcaActiva === 'todas' || p.marca === marcaActiva;
     const coincideCategoria = categoriaActiva === 'todas' || p.categoria === categoriaActiva;
     const texto = `${p.nombre} ${p.marca} ${p.categoria} ${p.color}`.toLowerCase();
     const coincideTexto = texto.includes(textoBusqueda.toLowerCase());
     return coincideMarca && coincideCategoria && coincideTexto;
   });
+
+  const ordenados = [...filtrados];
+
+  if (ordenActivo === 'precio-asc') {
+    ordenados.sort((a, b) => a.precio - b.precio);
+  } else if (ordenActivo === 'precio-desc') {
+    ordenados.sort((a, b) => b.precio - a.precio);
+  } else {
+    // "destacados" primero, respetando el orden original del JSON
+    ordenados.sort((a, b) => (b.destacado === true) - (a.destacado === true));
+  }
+
+  return ordenados;
 }
 
 /* --------------------------------------------------------------------
@@ -103,6 +120,8 @@ function crearTarjeta(producto) {
 function renderizarProductos() {
   const lista = obtenerProductosFiltrados();
 
+  actualizarContador(lista.length);
+
   if (lista.length === 0) {
     grid.innerHTML = `
       <div class="catalogo__vacio">
@@ -114,6 +133,39 @@ function renderizarProductos() {
 
   grid.innerHTML = lista.map(crearTarjeta).join('');
   activarGaleriaHover();
+  animarTarjetasEnCascada();
+}
+
+/* --------------------------------------------------------------------
+   Texto "Mostrando X de Y pares"
+   -------------------------------------------------------------------- */
+function actualizarContador(cantidadFiltrada) {
+  if (!contadorResultados) return;
+  contadorResultados.innerHTML = `Mostrando <strong>${cantidadFiltrada}</strong> de <strong>${productos.length}</strong> pares`;
+}
+
+/* --------------------------------------------------------------------
+   Anima cada tarjeta en cascada apenas entra al viewport
+   -------------------------------------------------------------------- */
+function animarTarjetasEnCascada() {
+  const tarjetas = document.querySelectorAll('.producto-card');
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add('visible');
+          observador.unobserve(entrada.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  tarjetas.forEach((tarjeta, indice) => {
+    tarjeta.style.animationDelay = `${Math.min(indice, 8) * 0.06}s`;
+    observador.observe(tarjeta);
+  });
 }
 
 /* --------------------------------------------------------------------
@@ -179,6 +231,55 @@ document.querySelectorAll('.categoria-card').forEach((card) => {
     renderizarProductos();
   });
 });
+
+/* --------------------------------------------------------------------
+   Selector de orden (destacados / precio asc / precio desc)
+   -------------------------------------------------------------------- */
+selectorOrden?.addEventListener('change', (e) => {
+  ordenActivo = e.target.value;
+  renderizarProductos();
+});
+
+/* --------------------------------------------------------------------
+   Botón "Limpiar filtros": resetea marca, categoría, texto y orden
+   -------------------------------------------------------------------- */
+botonLimpiar?.addEventListener('click', () => {
+  marcaActiva = 'todas';
+  categoriaActiva = 'todas';
+  textoBusqueda = '';
+  ordenActivo = 'destacados';
+
+  inputBuscador.value = '';
+  selectorOrden.value = 'destacados';
+  filtrosMarca.querySelectorAll('.filtro-chip').forEach((c, i) => c.classList.toggle('activo', i === 0));
+
+  renderizarProductos();
+});
+
+/* --------------------------------------------------------------------
+   Revelado en cascada de las tarjetas de categoría al hacer scroll
+   -------------------------------------------------------------------- */
+function animarCategorias() {
+  const tarjetas = document.querySelectorAll('.categoria-card');
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add('visible');
+          observador.unobserve(entrada.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  tarjetas.forEach((tarjeta, indice) => {
+    tarjeta.style.animationDelay = `${indice * 0.08}s`;
+    observador.observe(tarjeta);
+  });
+}
+
+animarCategorias();
 
 /* --------------------------------------------------------------------
    Menú móvil (placeholder simple, se expande en Fase 3/4)

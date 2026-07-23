@@ -91,6 +91,18 @@
       <button class="filtro-chip" data-marca="New Balance">New Balance</button>
     </div>
 
+    <div class="catalogo__barra">
+      <p class="catalogo__contador" id="contador-resultados"></p>
+      <div class="catalogo__barra-acciones">
+        <select class="selector-orden" id="selector-orden">
+          <option value="destacados">Destacados</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+        </select>
+        <button class="boton-limpiar" id="boton-limpiar">Limpiar filtros</button>
+      </div>
+    </div>
+
     <div class="productos__grid" id="grid-productos">
       <!-- Las tarjetas de producto se generan dinámicamente desde data/products.json -->
     </div>

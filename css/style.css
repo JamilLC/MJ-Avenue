@@ -354,6 +354,54 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   font-weight: 600;
 }
 
+.catalogo__barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gris-borde);
+}
+
+.catalogo__contador {
+  font-size: 0.82rem;
+  color: var(--gris);
+}
+
+.catalogo__contador strong { color: var(--blanco); }
+
+.catalogo__barra-acciones {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.selector-orden {
+  background: var(--negro-suave);
+  border: 1px solid var(--gris-borde);
+  color: var(--blanco);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  padding: 9px 14px;
+  border-radius: 2px;
+  transition: border-color var(--transicion);
+}
+
+.selector-orden:hover,
+.selector-orden:focus-visible { border-color: var(--dorado); }
+
+.boton-limpiar {
+  font-size: 0.8rem;
+  color: var(--gris);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transicion);
+}
+
+.boton-limpiar:hover { color: var(--dorado); }
+
 .productos__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -571,4 +619,69 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .productos__grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
   .footer__grid { grid-template-columns: 1fr; gap: 30px; }
   .hero { min-height: 78vh; }
+  .catalogo__barra { flex-direction: column; align-items: flex-start; }
+}
+
+/* ==========================================================================
+   ANIMACIONES (Fase 3)
+   ========================================================================== */
+
+@keyframes entrarArriba {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes entrarIzquierda {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Secuencia de entrada del hero al cargar la página */
+.hero__contenido .eyebrow      { animation: entrarArriba 0.7s ease both; }
+.hero__contenido .hero__titulo { animation: entrarArriba 0.7s ease 0.1s both; }
+.hero__contenido .hero__texto  { animation: entrarArriba 0.7s ease 0.2s both; }
+.hero__contenido .hero__cta    { animation: entrarArriba 0.7s ease 0.3s both; }
+
+/* Revelado al hacer scroll: se activa agregando .visible por IntersectionObserver */
+.animar-entrada {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animar-entrada.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Las tarjetas de producto entran en cascada (el delay lo pone JS por índice) */
+.producto-card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.producto-card.visible {
+  animation: entrarArriba 0.5s ease both;
+}
+
+.categoria-card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.categoria-card.visible {
+  animation: entrarArriba 0.5s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__contenido .eyebrow,
+  .hero__contenido .hero__titulo,
+  .hero__contenido .hero__texto,
+  .hero__contenido .hero__cta,
+  .producto-card,
+  .categoria-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
