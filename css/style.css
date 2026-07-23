@@ -96,6 +96,9 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .header__logo img {
   height: 54px;
   width: auto;
+  background: var(--blanco);
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 .footer__logo {
