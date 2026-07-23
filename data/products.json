@@ -6,7 +6,7 @@
     "marca": "Adidas",
     "categoria": "Basketball",
     "color": "White / Blanco",
-    "precio": 100,
+    "precio": 180,
     "precioAnterior": null,
     "destacado": false,
     "imagenes": [
@@ -14,7 +14,18 @@
       "Imagen2.png",
       "Imagen3.png"
     ],
-    "tallas": []
+    "tallas": [ 
+      
+    {"talla": "39.5",
+    "stock": 1},
+      
+    {"talla": "40",
+    "stock": 3},
+      
+    {"talla": "43",
+    "stock": 1},
+    ]
+    
   },
   {
     "id": "adidas-ownthegame-3-0-red-rojo-02",
