@@ -308,20 +308,28 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   align-items: flex-end;
   padding: 22px;
   overflow: hidden;
-  transition: border-color var(--transicion);
+  transition: border-color var(--transicion), transform var(--transicion);
+  background-color: var(--negro-suave);
+  background-size: cover;
+  background-position: center;
 }
 
 .categoria-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(200,165,75,0.10), transparent 55%);
-  opacity: 0;
+  background:
+    linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.92) 100%),
+    linear-gradient(160deg, rgba(200,165,75,0.12), transparent 55%);
   transition: opacity var(--transicion);
 }
 
-.categoria-card:hover { border-color: var(--dorado); }
-.categoria-card:hover::before { opacity: 1; }
+.categoria-card:hover {
+  border-color: var(--dorado);
+  transform: translateY(-4px);
+}
+
+.categoria-card:hover span { color: var(--dorado); }
 
 .categoria-card span {
   font-family: var(--font-display);
@@ -329,6 +337,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   letter-spacing: 0.03em;
   position: relative;
   z-index: 1;
+  transition: color var(--transicion);
 }
 
 /* ==========================================================================
