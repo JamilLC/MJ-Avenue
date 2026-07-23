@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "id": "adidas-breaknet-mid-white",
+    "carpeta": "BASKETBALL - BREAKNET MID - WHITEBLANCO - ADIDAS",
+    "nombre": "Breaknet Mid",
+    "marca": "Adidas",
+    "categoria": "Basketball",
+    "color": "White / Blanco",
+    "precio": 349,
+    "precioAnterior": 429,
+    "destacado": true,
+    "imagenes": [
+      "Imagen61.jpg",
+      "Imagen62.jpg",
+      "Imagen63.jpg"
+    ],
+    "tallas": [
+      { "talla": "39", "stock": 3 },
+      { "talla": "40", "stock": 5 },
+      { "talla": "41", "stock": 4 },
+      { "talla": "42", "stock": 2 },
+      { "talla": "43", "stock": 0 }
+    ]
+  }
+]

@@ -1,1 +1,146 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>MJ Avenue Store</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"></head><body><header id="header"><div class="container"><div class="logo"><img src="assets/logo/logo.png" alt="Logo"><h1>MJ Avenue</h1></div><nav class="menu"><a href="#hero">Inicio</a><a href="#categories">Marcas</a><a href="#products">Catálogo</a></nav><div class="search-box"><input id="searchInput" placeholder="Buscar zapatillas..."></div></div></header><section id="hero"><div class="container hero-content"><h2>Descubre tu próximo par favorito.</h2><p>Catálogo premium de zapatillas.</p><a class="btn-primary" href="#products">Ver catálogo</a></div></section><section id="categories"><div class="container"><div class="category-buttons"><button class="category active">Todos</button><button class="category">Nike</button><button class="category">Adidas</button><button class="category">Puma</button></div></div></section><main id="products"><div class="container"><div id="products-grid"></div></div></main><footer id="footer"><div class="container"><p>© MJ Avenue Store</p></div></footer><script src="js/app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MJ Avenue Store | Zapatillas Originales</title>
+<meta name="description" content="MJ Avenue Store — Catálogo premium de zapatillas Nike, Adidas, Puma y New Balance.">
+<link rel="icon" href="assets/logo/logo.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="header__barra">
+    <a href="#inicio" class="header__logo">
+      <img src="assets/logo/logo.png" alt="MJ Avenue Store">
+      <span class="header__logo-texto">MJ AVENUE<span>.</span></span>
+    </a>
+
+    <nav class="header__nav">
+      <a href="#inicio" class="activo">Inicio</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#footer">Contacto</a>
+    </nav>
+
+    <div class="header__acciones">
+      <div class="buscador">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="input-buscador" placeholder="Buscar zapatillas, marca...">
+      </div>
+      <button class="header__menu-movil" id="btn-menu-movil" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="contenedor">
+    <div class="hero__contenido">
+      <p class="eyebrow">Nueva colección · 2026</p>
+      <h1 class="hero__titulo">Pisa fuerte.<br>Viste <em>original</em>.</h1>
+      <p class="hero__texto">
+        Zapatillas 100% originales de las marcas que marcan tendencia.
+        Autenticidad garantizada, entrega segura en Perú.
+      </p>
+      <a href="#catalogo" class="hero__cta">
+        Ver catálogo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORÍAS ================= -->
+<section class="categorias" id="categorias">
+  <div class="contenedor">
+    <div class="seccion__cabecera">
+      <div>
+        <p class="eyebrow">Explora</p>
+        <h2 class="seccion__titulo">Categorías</h2>
+      </div>
+    </div>
+    <div class="categorias__grid">
+      <a href="#catalogo" class="categoria-card" data-categoria="Basketball"><span>Basketball</span></a>
+      <a href="#catalogo" class="categoria-card" data-categoria="Running"><span>Running</span></a>
+      <a href="#catalogo" class="categoria-card" data-categoria="Lifestyle"><span>Lifestyle</span></a>
+      <a href="#catalogo" class="categoria-card" data-categoria="Training"><span>Training</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATÁLOGO ================= -->
+<section class="catalogo" id="catalogo">
+  <div class="contenedor">
+    <div class="seccion__cabecera">
+      <div>
+        <p class="eyebrow">MJ Avenue Store</p>
+        <h2 class="seccion__titulo">Catálogo</h2>
+      </div>
+    </div>
+
+    <div class="catalogo__filtros" id="filtros-marca">
+      <button class="filtro-chip activo" data-marca="todas">Todas las marcas</button>
+      <button class="filtro-chip" data-marca="Nike">Nike</button>
+      <button class="filtro-chip" data-marca="Adidas">Adidas</button>
+      <button class="filtro-chip" data-marca="Puma">Puma</button>
+      <button class="filtro-chip" data-marca="New Balance">New Balance</button>
+    </div>
+
+    <div class="productos__grid" id="grid-productos">
+      <!-- Las tarjetas de producto se generan dinámicamente desde data/products.json -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="footer">
+  <div class="contenedor">
+    <div class="footer__grid">
+      <div class="footer__marca">
+        <div class="header__logo-texto">MJ AVENUE<span>.</span></div>
+        <p>Tienda especializada en zapatillas originales. Estilo, autenticidad y actitud en cada par.</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__titulo">Tienda</p>
+        <ul>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#categorias">Categorías</a></li>
+          <li><a href="#inicio">Novedades</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__titulo">Ayuda</p>
+        <ul>
+          <li><a href="#">Guía de tallas</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__titulo">Contacto</p>
+        <ul>
+          <li><a href="https://wa.me/51915972650" target="_blank" rel="noopener">+51 915 972 650</a></li>
+          <li><a href="https://wa.me/51986070360" target="_blank" rel="noopener">+51 986 070 360</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 MJ Avenue Store. Todos los derechos reservados.</span>
+      <span>Hecho con actitud en Perú 🇵🇪</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/51915972650" target="_blank" rel="noopener" class="whatsapp-flotante" aria-label="Escríbenos por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.82L2 22l5.44-1.43a9.9 9.9 0 004.6 1.14h.01c5.46 0 9.9-4.45 9.9-9.9C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.42-.71-2.9-1.15-4.76-4.1-4.9-4.29-.15-.19-1.17-1.55-1.17-2.96s.73-2.1.99-2.39c.26-.29.56-.36.75-.36l.53.01c.17 0 .4-.06.62.48.24.58.8 1.99.87 2.13.07.15.11.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.13-.28.28-.13.55.15.27.68 1.13 1.47 1.83 1.01.9 1.87 1.19 2.14 1.32.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.55.73 1.81.87.27.13.45.19.51.3.07.11.07.63-.17 1.31z"/></svg>
+</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>

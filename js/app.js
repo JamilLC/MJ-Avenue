@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{document.getElementById("products-grid").innerHTML="<h3>Próximamente aparecerán los productos.</h3>";});
